@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Ini adalah tampilan Login</h1>
+    <h1>Ini Adalah Tampilan Login</h1>
 </body>
 </html>
