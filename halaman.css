@@ -1,0 +1,16 @@
+header {
+    width: 102%;
+    background-color: #749BC2;
+    margin-top: -2rem;
+    height: 78px;
+    margin-left: -8px;
+}
+.slide{
+    margin-top: 32px;
+    padding: 6px;
+}
+
+img.calender {
+    margin-left: 3rem;
+    margin-top: 33px;
+}
