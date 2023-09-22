@@ -1,0 +1,74 @@
+body{
+    background-color: #F0EEED;
+}
+.slide{
+    margin-top: 32px;
+    padding: 6px;
+}
+
+.slide h2 {
+    margin-left: 63px;
+    margin-top: -33px;
+    text-align: justify;
+    font-family: math;
+}
+
+img.user {
+    margin-left: 73rem;
+    margin-top: 20px;
+}
+
+img.plus {
+    margin-top: 4px;
+    margin-left: 15px;
+}
+
+.plus a{
+    margin-top: -1px;
+}
+
+.tambah {
+    background-color: #93BFCF;
+    width: 138px;
+    margin: 14px;
+    border-radius: 19px;
+    height: 30px;
+    margin-top: 25px;
+}
+
+.search input[type=text] {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: -41px;
+    margin-right: 95px;
+    font-size: 17px;
+    border-radius: 40px;
+}
+
+input[type="submit"] {
+    margin-left: 75rem;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+thead {
+    background-color: #D9D9D9;
+}
+
+table {
+    width: 91%;
+    border-collapse: collapse;
+    margin-left: 46px;
+}
+
+img.home {
+    margin-left: -74rem;
+}
