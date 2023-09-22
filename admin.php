@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="../style/admin.css">
     <title>Admin</title>
 </head>
 <style>
@@ -25,19 +25,19 @@ a {
     <form action="prosesregis.php" method="post">
     <header>
         <div class="slide">
-        <img class="user" src="userr.png" alt="img" width="30" height="30">
-        <img class= "home" src="home.png" alt="img" width="30" height="30">
+        <img class="user" src="../img/userr.png" alt="img" width="30" height="30">
+        <img class= "home" src="../img/home.png" alt="img" width="30" height="30">
             <h2>Selamat Datang Admin!</h2>
- </header>
- <div class="tambah">
-<img class="plus"src="plus.png" alt="img" width="15" height="15">
-<a href="admin.php">Tambah Data</a>
-</div>
-<div class="search">
-<input type="text" placeholder="Search..">
-<input type="submit" name="submit" >
-</div>
-<table>
+    </header>
+    <div class="tambah">
+        <img class="plus"src="../img/plus.png" alt="img" width="15" height="15">
+        <a href="admin.php">Tambah Data</a>
+        </div>
+        <div class="search">
+        <input type="text" placeholder="Search..">
+        <input type="submit" name="submit" >
+    </div>
+    <table>
         <thead>
             <tr>
                 <th>No</th>
