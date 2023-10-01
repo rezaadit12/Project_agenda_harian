@@ -5,23 +5,17 @@ if(!isset($_SESSION['nama'])){
 	header("Location: index.php");
 }
 $nama = $_SESSION['nama'];
+$email = $_SESSION['email'];
 
 
-if($nama === "admin"){
+if($nama === "Admin"){
     header('Location: admin.php');
 }
 
 
 require 'Data/function.php';
 
-if(isset($_POST['tambah_kegiatan'])){
-    if(create($_POST) > 0){
-        echo"<script>
-                alert('Data berhasil ditambahkan!');
-                document.location.href = 'index.php';
-            </script>";
-    }
-}
+
 ?>
 
 
@@ -31,65 +25,21 @@ if(isset($_POST['tambah_kegiatan'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style_mainPage.css">
     <script src="js/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="fontawesome-free/css/all.min.css">
-    <title>FrontEnd</title>
-    <style>
-        body{
-            background-color:#d0e7d2;
-        }
-        a{
-            text-decoration: none;
-        }
+    <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
 
-        .mainNavbar {
-        background-color: black; /* Ganti dengan warna latar belakang yang sesuai */
-        box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1); /* Atur bayangan sesuai preferensi Anda */
-    }
-        .card-body .option {
-            float: right;
-        }
+    <title>WePlan | <?= $nama ?></title>
 
-        /* .login{
-            background-color:antiquewhite;
-        } */
-
-        span{
-            font-family: "Helvetica Neue",Helvetica;
-            font-size: 24px;
-        }
-
-        .title1{
-            background-color:#016A70;
-            color:white;
-        }
-
-        .mainNavbar, .logoItem{
-            color: white;
-            background-color: #4682A9;
-        }
-
-        .logoItem img{
-            border-radius: 50px;
-        }
-
-        .mainButton{
-            background-color: #b3abab;
-        }
-
-        .text{
-            background-color: white;
-            border: none; 
-            font-style:italic;
-            text-decoration:underline;
-            color:purple;
-        }
-    </style>
 </head>
 <body>
+
     <nav class="navbar navbar-expand-lg mainNavbar">
         <div class="container">
-            <a class="navbar-brand text-light" href=""><img src="img/calendar.png" alt="" width="46"> <span>WePlan</span></a>
+            <a class="navbar-brand text-light" href="mainPage.php"><img src="img/calendar.png" alt="" width="46"> <span class="weland">WePlan</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -115,8 +65,9 @@ if(isset($_POST['tambah_kegiatan'])){
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                             <button class="btn logoItem " data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="img/kang.jpeg" width="40" id="user-image">
-                                <b><?= $nama ?></b>
+                            <b style="margin-right:7px;"><?= $nama ?></b>
+
+                            <img class="imgUser" src="img/photo-profile-default-circle.svg" width="40" id="user-image">
                             </button>
                             <ul class="dropdown-menu">
                             <li><p class="dropdown-item"><?= $nama; ?></p></li>
@@ -169,14 +120,15 @@ if(isset($_POST['tambah_kegiatan'])){
                         
                         </div>
                             <?php foreach($data_nama as $data): ?>
-                                <?php if($nama == $data['username']):?>
+                                <?php if($nama == $data['username'] && $email == $data['email']):?>
                                     <div class="card mt-3">
                                         <div class="card-body">
                                             <?= $data["isi_agenda"]; ?>
                                             <div class="option">
                                                 <a href="/" data-id="<?= $data['id']?>" class="tampilModalUbah" data-bs-toggle="modal" data-bs-target="#exampleModal" ><i class="fa-solid fa-pen-to-square"></i></a> |
                                                 <!-- <a href="/" data-id="<?= $data['id']?>" class="tampilDataUser" data-bs-toggle="modal" data-bs-target="#exampleModal" ><i class="fa-solid fa-circle-info"></i></a> | -->
-                                                <a href="Data/selesai.php?id=<?= $data['id']; ?>" onclick="return confirm('Apakah kegiatan anda sudah selesai')"><i class="fa-solid fa-square-check"></i></a> 
+                                                <!-- <a href="Data/selesai.php?id=<?= $data['id']; ?>" onclick="return confirm('Apakah kegiatan anda sudah selesai')"><i class="fa-solid fa-square-check"></i></a>  -->
+                                                <a href="#" onclick="contoh()"><i class="fa-solid fa-square-check"></i></a> 
 
                                             </div>
                                         </div>
@@ -208,21 +160,29 @@ if(isset($_POST['tambah_kegiatan'])){
                     <?php foreach($hasil as $data): ?>  
                         <div class="card mt-3 mb-4">
                             <div class="card-header">
+                                <i>
                                 Dibuat oleh : 
                                 <?php
-                                    if($nama == $data['username']){
+                                
+                                    if($nama == $data['username'] && $email == $data['email']){
                                         echo "<b>Anda</b>";
                                     }else{
                                         echo $data['username'];
                                     }
                                 ?>
+                                </i>
                                 <?php if($thasil) : ?>
                                     | <?= $data['tanggal'] ?> 
                                 <?php endif; ?>
                             </div>
+
                             <div class="card-body">
-                                <h5 class="card-title"><?= $data['isi_agenda'];?></h5>
-                                <p class="card-text"><?=  nl2br($data['rincian']);?></p>
+                                <?php if(strlen($data['gambar']) > 1):?>
+                                    <img class="mb-1" src="img_user/<?= $data["gambar"]?>" width="400"><hr>
+                                <?php endif;?>
+                                
+                                <h3 class="card-title"><?= $data['isi_agenda'];?></h3>
+                                <p class="card-text"><?= nl2br($data['rincian']);?></p>
                             </div>
                         </div>
                     <?php $i++ ?>
@@ -239,9 +199,10 @@ if(isset($_POST['tambah_kegiatan'])){
                 </div>
             </div>
         </div>
+        
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -249,23 +210,34 @@ if(isset($_POST['tambah_kegiatan'])){
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form action="" method="POST">
+            <form action="" method="POST" enctype="multipart/form-data">
+
+            <!-- ====== type hidden ======= -->
+                <input type="hidden"  name="gambarLama" id="gambarLama">
                 <input type="hidden" name="id" id="id">
                 <input type="hidden" name="name" id="name">
+                <input type="hidden" name="nama_user" value="<?= $nama?>">
+                <input type="hidden" name="email" value="<?= $email ?>">
+
+
                 <div class="card-body">
                     <div class="form-group">
-                        <div class="form-label">Judul </div>
-                            <input class="form-control" type="text" id="judul" name="judul_kegiatan" required autocomplete="off"><br>
-                        </div>
-                        <div class="form-group">
-                        <div class="form-label">Deskripsi Kegiatan</div>
-                            <textarea name="kegiatan" class="form-control" id="kegiatan" cols="30" rows="2" placeholder="Tidak wajib di isi"></textarea><br>
-                        </div>
-                        <div class="form-group">
-                        <div class="form-label">Tanggal</div>
-                            <input type="date" class="form-control" id="tanggal" name="tanggal_kegiatan" required autocomplete="off">
-                        </div>
-                            <input type="hidden" name="nama_user" value="<?= $nama?>">
+                        <div class="form-label"><b>Nama Kegiatan :</b></div>
+                        <input class="form-control" type="text" id="judul" name="judul_kegiatan" required autocomplete="off"><br>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label"><b>Upload gambar</b> (jika diperlukan) :</div>
+                        <input class="form-control" type="file" name="gambar" id="gambar"><br>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-label"><b>Rincian :</b></div>
+                        <textarea name="kegiatan" class="form-control" id="kegiatan" cols="30" rows="2" placeholder="(Tidak Wajib)"></textarea><br>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label"><b>Tanggal :</b></div>
+                        <input type="date" class="form-control" id="tanggal" name="tanggal_kegiatan" required autocomplete="off">
+                    </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -277,8 +249,61 @@ if(isset($_POST['tambah_kegiatan'])){
         </div>
     </div>
 
-    <!-- <script src="js/scr.js"></script> -->
+    <script src="js/script.js"></script>
+
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/scr.js"></script>
+    <script type="text/javascript">
+
+        function contoh() {
+
+            Swal.fire({
+                title: 'Kamu yakin?',
+                text: "Pastikan kegiatanmu sudah terselesaikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, saya yakin'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "Data/selesai.php?id=<?= $data['id']; ?>";
+
+                    }
+                })
+        }
+    </script>
+
 </body>
 </html>
+
+<?php
+
+if(isset($_POST['tambah_kegiatan'])){
+    if(create($_POST) > 0){
+        echo"<script>
+        Swal.fire(
+            'Berhasil',
+            'kegiatan berhasil ditambahkan!',
+            'success'
+        ).then((result) => {
+                    if (result) {
+                        document.location.href = 'mainPage.php';
+                    }
+                });
+            </script>";
+    }else{
+        echo"<script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Terjadi kesalahan, coba lagi!'
+          }).then((result) => {
+                    if (result) {
+                        document.location.href = 'mainPage.php';
+                    }
+                });
+            </script>";
+    }
+}
+?>
+

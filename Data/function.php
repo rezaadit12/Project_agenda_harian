@@ -22,7 +22,8 @@ $bulan = [
 
 if (isset($_GET['today'])) {
     $tanggal = date('Y-m-d'); 
-}else if (isset($_GET['tanggal'])) {
+}
+else if (isset($_GET['tanggal'])) {
     if($_GET['tanggal'] == null){  
         echo "<script>
                 alert('Input tanggal terlebih dahulu!');
@@ -31,12 +32,15 @@ if (isset($_GET['today'])) {
     }else{
         $tanggal = $_GET['tanggal'];
     } 
-}else {
+}
+else {
     $tanggal = date('Y-m-d'); 
 }
 
 $tanggal_parts = explode('-', $tanggal);
 $tanggal_formatted = $tanggal_parts[2] . ' ' . $bulan[(int)$tanggal_parts[1]] . ' ' . $tanggal_parts[0];
+
+// =====================================================================
 $tanggal_sebelumnya = date('Y-m-d', strtotime($tanggal . ' -1 day'));
 $tanggal_selanjutnya = date('Y-m-d', strtotime($tanggal . ' +1 day'));
 
@@ -51,9 +55,11 @@ if (isset($_GET['today'])) {
 }else if (isset($_GET['tanggal'])) {
     $tanggal = $_GET['tanggal'];
     $hasil = read("SELECT * FROM debug_backend WHERE tanggal = '$tanggal' ORDER BY id DESC");
-}else if(isset($_POST['saya'])){
-    $hasil = read("SELECT * FROM debug_backend WHERE username = '$nama' ORDER BY id DESC");
-}else {
+}
+// else if(isset($_POST['saya'])){
+//     $hasil = read("SELECT * FROM debug_backend WHERE username = '$nama' ORDER BY id DESC");
+// }
+else {
     $tanggal = date('Y-m-d'); 
     $hasil = read("SELECT * FROM debug_backend WHERE tanggal = '$tanggal' ORDER BY id DESC");
 }
@@ -68,7 +74,7 @@ if(isset($_POST['semua'])){
 }else if(isset($_POST['myPlan'])){
     $thasil = true;
     $tanggal_formatted = "kegiatan saya";
-    $hasil = read("SELECT * FROM debug_backend WHERE username = '$nama' ORDER BY id DESC");
+    $hasil = read("SELECT * FROM debug_backend WHERE username = '$nama'AND email = '$email' ORDER BY id DESC");
     
 }
 

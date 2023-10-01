@@ -1,8 +1,6 @@
-
 <?php
 
-
-$conn = mysqli_connect("localhost", "root", "", "dbphpdasar");
+$conn = mysqli_connect("localhost", "root", "", "db_agendaharian");
 
 function read($data){
     global $conn;
@@ -14,18 +12,24 @@ function read($data){
     return $arr;
 }
 
-
 function create($data){
     global $conn;
 
-    $tanggal = htmlspecialchars($_POST['tanggal_kegiatan']);
+    $tanggal = htmlspecialchars( $_POST['tanggal_kegiatan']);
     $judul = htmlspecialchars($_POST['judul_kegiatan']);
-    $rincian = htmlspecialchars($_POST['kegiatan']);
-    $user = htmlspecialchars($_POST['nama_user']);
+    $rincian = htmlspecialchars( $_POST['kegiatan']);
+    $user = htmlspecialchars( $_POST['nama_user']);
+    $email = htmlspecialchars( $_POST['email']);
+
+    $gambar = upload();
+    if(!$gambar){
+        return false;
+    }
+
 
     $query = "INSERT INTO debug_backend 
     VALUES
-    ('', '$tanggal', '$judul', '$rincian', '$user')";
+    ('', '$tanggal', '$judul', '$rincian', '$gambar' ,'$user', '$email' )";
 
     mysqli_query($conn, $query);
 
@@ -51,19 +55,24 @@ function hapus($id){
 
 function ubah($data){
     global $conn;
-    $id= $data["id"];
-    $tanggal = htmlspecialchars($data["tanggal_kegiatan"]);
-    $isi_agenda = htmlspecialchars($data["judul_kegiatan"]);
-    $rincian = htmlspecialchars($data["kegiatan"]);
-    $username = $data["name"];
+    $id = $data["id"];
+    $tanggal =  ( $data["tanggal_kegiatan"]);
+    $isi_agenda =  ( $data["judul_kegiatan"]);
+    $rincian =  ( $data["kegiatan"]);
+    $gambarLama = htmlspecialchars($data["gambarLama"]);
 
-
+    if($_FILES['gambar']['error'] === 4 ){
+        $gambar = $gambarLama;
+    }else{
+        $gambar = updateGambar();
+    }
+    
 
     $mhs = "UPDATE debug_backend SET
             tanggal = '$tanggal',
             isi_agenda = '$isi_agenda',
             rincian = '$rincian',
-            username = '$username'
+            gambar = '$gambar'
             WHERE id = $id
             ";   
     mysqli_query($conn, $mhs);
@@ -99,10 +108,87 @@ function register($data){
 
     }
 
-    $password = password_hash($password, PASSWORD_DEFAULT);
+    // $password = password_hash($password, PASSWORD_DEFAULT);
 
     mysqli_query($conn, "INSERT INTO user VALUES('', '$username', '$email','$password')");
 
     return mysqli_affected_rows($conn);
+}
+
+function upload(){
+    $namaFile = $_FILES['gambar']['name'];
+    $ukuranFile = $_FILES['gambar']['size'];
+    $error = $_FILES['gambar']['error'];
+    $tmpName = $_FILES['gambar']['tmp_name'];
+
+    if($error === 4){
+
+        return true;
+    }else{
+        
+    $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
+    $ekstensiGambar = explode('.', $namaFile);
+    $ekstensiGambar =  strtolower(end($ekstensiGambar));
+
+    if( !in_array($ekstensiGambar, $ekstensiGambarValid)){
+        echo"<script>
+                alert('yang anda upload bukan gambar!');
+            </script>";
+        return false;
+    }
+
+    if($ukuranFile > 3000000){
+        echo"<script>
+        alert('ukuran gambar terlau besar');
+        </script>";
+        return false;
+    }
+
+    $namaFileBaru = uniqid();
+    $namaFileBaru .= '.';
+    $namaFileBaru .= $ekstensiGambar;
+
+    move_uploaded_file($tmpName, 'img_user/' . $namaFileBaru);
+
+    return $namaFileBaru;
+    }
+}
+
+function updateGambar(){
+    $namaFile = $_FILES['gambar']['name'];
+    $ukuranFile = $_FILES['gambar']['size'];
+    $error = $_FILES['gambar']['error'];
+    $tmpName = $_FILES['gambar']['tmp_name'];
+
+    if($error === 4){
+        return true;
+    }else{
+    $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
+    $ekstensiGambar = explode('.', $namaFile);
+    $ekstensiGambar =  strtolower(end($ekstensiGambar));
+
+    if( !in_array($ekstensiGambar, $ekstensiGambarValid)){
+        echo"<script>
+                alert('yang anda upload bukan gambar!');
+            </script>";
+        return false;
+    }
+
+
+    if($ukuranFile > 3000000){
+        echo"<script>
+        alert('ukuran gambar terlau besar');
+        </script>";
+        return false;
+    }
+
+    $namaFileBaru = uniqid();
+    $namaFileBaru .= '.';
+    $namaFileBaru .= $ekstensiGambar;
+
+    move_uploaded_file($tmpName, '../img_user/' . $namaFileBaru);
+
+    return $namaFileBaru;
+    }
 
 }

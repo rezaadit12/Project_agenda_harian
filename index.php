@@ -11,6 +11,7 @@ if (isset($_COOKIE['useid']) && isset($_COOKIE['usemailuser'])) {
     $row = mysqli_fetch_assoc($result);
 
     if ($mailuser === hash('sha256', $row['email'])) {
+		$_SESSION['email'] = $row['email'];
         $_SESSION['nama'] = $row['username'];	
     }
 }
@@ -21,57 +22,25 @@ if (isset($_SESSION['nama'])) {
 }
 
 
-if(isset($_POST['submit'])){
-	
-	$email = $_POST['email'];
-	$password = $_POST['password'];
 
-	$query = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email' ");
-
-	if(mysqli_num_rows($query) === 1){
-		$row = mysqli_fetch_assoc($query);
-
-
-		if(password_verify($password, $row["password"])){
-
-			if($row['username'] == "admin"){
-				$_SESSION['nama'] = $row['username'];
-				header('Location: admin.php');
-			}else{
-
-				$_SESSION['nama'] = $row['username'];
-				header("Location: mainPage.php");
-				setcookie('useid', $row['id'] , time() + 720000, '/'); 
-				setcookie('usemailuser',  hash('sha256', $email), time() + 720000, '/'); 
-			}
-
-		}else{
-			echo"<script>
-					alert('Email/Password tidak sesuai!');
-				</script>";
-		}
-
-	}else{
-		echo"<script>
-			alert('Email/Password tidak sesuai!');
-		</script>";
-	}
-}
 ?>
 
-			
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Animated Login Form</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<title>Login Form</title>
+	<link rel="stylesheet" type="text/css" href="css/style6.css">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="fontawesome-free/css/all.min.css">
+    <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
 
 </head>
 <body>
-	<img class="wave" src="img/begron.svg">
+	<img class="wave" src="img/satu.svg">
 	<div class="container">
 		<div class="img">
 			<img src="img/working1.png" >
@@ -98,11 +67,67 @@ if(isset($_POST['submit'])){
 							<input type="password" class="input" name="password" required>
 					</div>
             	</div>
-            	<a href="register.php">belum punya akun? sign Up</a>
+            	<!-- <a href="register.php">belum punya akun? sign Up</a> -->
+            	<a href="https://wa.me/6287818735781" target="_blank">Untuk bantuan, silahkan hubungi CS</a>
             	<input type="submit" class="btn" value="Login" name="submit">
             </form>
         </div>
     </div>
     <script type="text/javascript" src="js/main.js"></script>
+<h1></h1>
 </body>
 </html>
+
+
+
+<?php
+
+
+
+if(isset($_POST['submit'])){
+	
+	$email = $_POST['email'];
+	$password = $_POST['password'];
+
+	$query = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email' ");
+
+	if(mysqli_num_rows($query) === 1){
+		$row = mysqli_fetch_assoc($query);
+
+
+		// if(password_verify($password, $row["password"])){
+		if($password === $row["password"]){
+
+			if($row['username'] == "admin"){
+				$_SESSION['nama'] = $row['username'];
+				$_SESSION['email'] = $row['email'];
+				header('Location: admin.php');
+			}else{
+				$_SESSION['email'] = $row['email'];
+				$_SESSION['nama'] = $row['username'];
+				header("Location: mainPage.php");
+
+				setcookie('useid', $row['id'] , time() + 720000, '/'); 
+				setcookie('usemailuser',  hash('sha256', $email), time() + 720000, '/'); 
+			}
+
+		}else{
+			echo"<script>
+					Swal.fire({
+						icon: 'info',
+						title: 'Oops...',
+						text: 'Username/password tidak sesuai!'
+					})
+				</script>";
+		}
+
+	}else{
+		echo"<script>
+					Swal.fire({
+						icon: 'info',
+						title: 'Oops...',
+						text: 'Username/password tidak sesuai!'
+					})
+			</script>";
+	}
+}

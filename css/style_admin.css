@@ -1,0 +1,43 @@
+body{
+    background-color: #d0e7d2;  
+}
+span{
+    font-family: "Helvetica Neue",Helvetica;
+    font-size: 24px;
+}
+.navigation {
+    display: flex;
+    justify-content: space-between;
+}
+.mainNavbar {
+    background-color: black; 
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1); 
+}
+.mainNavbar, .logoItem{
+    color: white;
+    background-color: #4682A9;
+}
+
+.linkData {
+    justify-content: space-between;
+}
+
+.today {
+    margin-left: 100px;
+}
+
+.imgUser {
+    border-radius: 50%;
+}
+
+.directionRow1 {
+    font-size: 25px;
+    margin-left:10px;
+}
+.directionRow2 {
+    font-size: 25px;
+}
+
+a{
+    text-decoration:none;
+}

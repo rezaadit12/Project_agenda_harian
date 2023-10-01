@@ -1,16 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="../node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="../node_modules/sweetalert2/dist/sweetalert2.min.css">
+    <style>
+        body{
+            background-color: #d0e7d2;  
+        }
+    </style>
+</head>
+<body>
+    
 <?php
 
 
 require 'data.php';
 
-if(ubah($_POST) > 0){
-    echo"<script>
-                alert('Kegiatan berhasil diubah!');
-                document.location.href = '../admin.php';
-            </script>";
+
+if (ubah($_POST) > 0) {
+    echo "<script>
+    Swal.fire(
+        'Berhasil',
+        'Kegiatan berhasil diubah!',
+        'success'
+      ).then((result) => {
+                if (result) {
+                    document.location.href = '../admin.php';
+                }
+            });
+          </script>";
 }else{
     echo"<script>
-                alert('Kegiatan gagal diubah!');
-                document.location.href = '../admin.php';
-            </script>";
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Terjadi kesalahan, coba lagi!'
+      }).then((result) => {
+                if (result) {
+                    document.location.href = '../admin.php';
+                }
+            });
+        </script>";
 }
+?>
+
+</body>
+</html>
+
+
+

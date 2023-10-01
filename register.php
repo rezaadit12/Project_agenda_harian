@@ -1,11 +1,16 @@
 <?php
 session_start();
+require 'Data/data.php';
 
-if (isset($_SESSION['nama'])) {
-	header("location: mainPage.php");
+$nama = $_SESSION['nama'];
+
+if($nama !== "Admin"){
+    header('Location: main.html');
+}else{
+
 }
 
-require 'Data/data.php';
+
 
 if(isset($_POST['submit'])){
 	if(register($_POST) > 0){
@@ -28,18 +33,18 @@ if(isset($_POST['submit'])){
 <html>
 
 <head>
-    <title>Animated Login Form</title>
+    <title>Tambah User</title>
     <link rel="stylesheet" type="text/css" href="css/style5.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
 </head>
 
 <body>
-    <img class="wave" src="img/wave.png">
+    <img class="wave" src="img/blob-scene-haikei (4).svg">
     <div class="container">
-
-        <div class="login-content">
+    <div class="login-content">
             <form action="" method="post">
                 <!-- <img src="img/avatar.svg"> -->
                 <h2 class="title">New Account?</h2>

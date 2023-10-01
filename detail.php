@@ -1,12 +1,16 @@
 <?php
 
-session_start();
 
-if(!isset($_SESSION['nama'])){
-	header("Location: index.php");
+session_start();
+require 'Data/data.php';
+
+$nama = $_SESSION['nama'];
+
+if($nama !== "Admin"){
+    header('Location: mainPage.php');
 }
 
-require 'Data/data.php';
+
 
 $id = $_GET['id'];
 
@@ -23,7 +27,7 @@ $user = read("SELECT * FROM debug_backend WHERE id = '$id'")[0];
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <title>Detail | <?= $user['username'];?></title>
     <style>
-                body{
+        body{
             background-color: #D0E7D2;
         }
 
@@ -31,19 +35,14 @@ $user = read("SELECT * FROM debug_backend WHERE id = '$id'")[0];
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh; 
         }
-
-
-
-
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="card w-50 mb-3">
+        <div class="card w-50 mb-5 mt-5">
             <div class="card-body">
-                <h4 class="card-title">Dibuat Oleh : <?= $user['username']?></h4><hr><br>
+                <h5 class="card-title">Dibuat Oleh : <?= $user['username']?> | <?= $user['email']?></h5><hr><br>
                 <table>
                     <tr>
                         <td><b>Tanggal</b></td>
@@ -55,11 +54,12 @@ $user = read("SELECT * FROM debug_backend WHERE id = '$id'")[0];
                         <td><b>: &nbsp</b></td>
                         <td><?= $user['isi_agenda']?></td>
                     </tr>
+                    <?php if(strlen($user['gambar']) > 1):?>
+                        <img class="mb-1" src="img_user/<?= $user["gambar"]?>" width="400"><hr>
+                    <?php endif;?>
                 </table><br><br>
-
                 <b> Rincian kegiatan : </b>
-                    
-                <p class="card-text">
+                <p class="card-text ">
                     <?php if($user['rincian'] == null):?>
                         -
                     <?php else:?>
