@@ -1,4 +1,4 @@
-Poject Agenda harian 
+<h2>Project Agenda Harian</h2>
 
 untuk mencoba:
 
@@ -6,8 +6,8 @@ untuk mencoba:
     email       : reza@gmail.com <br>
     password    : 1234
 
-- Sebagai admin
-    email       : muhamadrezaaditya@smkwikrama.sch.id
+- Sebagai admin <br>
+    email       : muhamadrezaaditya@smkwikrama.sch.id <br>
     password    : 123
 
 
