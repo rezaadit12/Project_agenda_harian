@@ -1,16 +1,16 @@
-<h2>Project Agenda Harian</h2>
+<h1>Project Agenda Harian</h1>
 
 untuk mencoba:
 
-- Sebagai user  
+- Sebagai User  
     email       : reza@gmail.com <br>
     password    : 1234
 
-- Sebagai admin <br>
+- Sebagai Admin <br>
     email       : muhamadrezaaditya@smkwikrama.sch.id <br>
     password    : 123
 
 
-Dan jangan lupa untuk import database yang ada di file 
+Dan jangan lupa untuk import database yang ada di folder
 
 <i><b>"file_DATABASE/db_agendaharian.sql"</b></i>
