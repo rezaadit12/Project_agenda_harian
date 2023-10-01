@@ -3,7 +3,7 @@ Poject Agenda harian
 untuk mencoba:
 
 - Sebagai user  
-    email       : reza@gmail.com
+    email       : reza@gmail.com <br>
     password    : 1234
 
 - Sebagai admin
