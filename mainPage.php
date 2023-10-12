@@ -32,14 +32,14 @@ require 'Data/function.php';
     <script src="node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
 
-    <title>WePlan | <?= $nama ?></title>
+    <title>Agenda Harian | <?= $nama ?></title>
 
 </head>
 <body>
 
     <nav class="navbar navbar-expand-lg mainNavbar">
         <div class="container">
-            <a class="navbar-brand text-light" href="mainPage.php"><img src="img/calendar.png" alt="" width="46"> <span class="weland">WePlan</span></a>
+            <a class="navbar-brand text-light" href="mainPage.php"><img src="img/calendar.png" alt="" width="46"> <span class="weland">Agenda Harian</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -94,10 +94,10 @@ require 'Data/function.php';
                     <form action="" method="post">
                         <div class="card-body">
                             
-                        <button type="button" class="btn btn-danger tombolTambahData" style="width: 55%;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <button type="button" class="btn btn-primary tombolTambahData" style="width: 55%;" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <i class="fa-solid fa-plus"></i> Buat Kegiatan
                         </button>
-                        <button type="submit" id="semua" name="semua" class="btn btn-warning">Semua Kegiatan</button>
+                        <button type="submit" id="semua" name="semua" class="btn btn-secondary">Semua Kegiatan</button>
                     </form>
 
                     <form action="" method="get">
@@ -151,7 +151,7 @@ require 'Data/function.php';
                                 <a href="?tanggal=<?=$tanggal_selanjutnya; ?>"><i class="fa-solid fa-chevron-left fa-rotate-180"> </i> </a>
                             </h2>
                             <div class="option mx-5">
-                                <a href="?today" class="btn btn-secondary" >Today</a>
+                                <a href="?today" class="btn btn-dark" >Today</a>
                             </div>
                         </div>
                     </div>
@@ -236,7 +236,7 @@ require 'Data/function.php';
                     </div>
                     <div class="form-group">
                         <div class="form-label"><b>Tanggal :</b></div>
-                        <input type="date" class="form-control" id="tanggal" name="tanggal_kegiatan" required autocomplete="off">
+                        <input type="datetime-local" class="form-control" id="tanggal" name="tanggal_kegiatan" required autocomplete="off">
                     </div>
                     </div>
                 </div>
