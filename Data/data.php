@@ -137,12 +137,12 @@ function upload(){
         return false;
     }
 
-    if($ukuranFile > 3000000){
-        echo"<script>
-        alert('ukuran gambar terlau besar');
-        </script>";
-        return false;
-    }
+    // if($ukuranFile > 3000000){
+    //     echo"<script>
+    //     alert('ukuran gambar terlau besar');
+    //     </script>";
+    //     return false;
+    // }
 
     $namaFileBaru = uniqid();
     $namaFileBaru .= '.';
@@ -175,12 +175,12 @@ function updateGambar(){
     }
 
 
-    if($ukuranFile > 3000000){
-        echo"<script>
-        alert('ukuran gambar terlau besar');
-        </script>";
-        return false;
-    }
+    // if($ukuranFile > 3000000){
+    //     echo"<script>
+    //     alert('ukuran gambar terlau besar');
+    //     </script>";
+    //     return false;
+    // }
 
     $namaFileBaru = uniqid();
     $namaFileBaru .= '.';
