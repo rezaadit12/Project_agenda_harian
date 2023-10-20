@@ -188,6 +188,15 @@ a:hover{
 .btn:hover{
 	background-position: right;
 }
+.logo-container {
+	display: flex;
+	justify-content: flex-end;
+  } 
+.logo {
+	width: 20px; 
+	height: 20px; 
+  }
+  
 
 
 @media screen and (max-width: 1050px){

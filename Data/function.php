@@ -38,6 +38,8 @@ else {
 }
 
 $tanggal_parts = explode('-', $tanggal);
+
+echo 
 $tanggal_formatted = $tanggal_parts[2] . ' ' . $bulan[(int)$tanggal_parts[1]] . ' ' . $tanggal_parts[0];
 
 // =====================================================================

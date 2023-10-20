@@ -40,8 +40,10 @@ if (isset($_SESSION['nama'])) {
 
 </head>
 <body>
-	<img src="logo.jpeg">
 	<img class="wave" src="img/satu.svg">
+	<div class="logo-container">
+  		<img src="img/.png" alt="Logo" class="logo">
+	</div>
 	<div class="container">
 		<div class="img">
 			<img src="img/working1.png" >
