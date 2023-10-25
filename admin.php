@@ -59,14 +59,14 @@ if(isset($_POST['semua'])){
     <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script src="node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
-    <title>Admin WePlan</title>
+    <title>Agenda Harian</title>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg  mainNavbar">
         <div class="container">
             <a class="navbar-brand text-light" href="admin.php"><img src="img/calendar.png" alt="" width="46">
-                <span>WePlan</span></a>
+                <span>Agenda Harian</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

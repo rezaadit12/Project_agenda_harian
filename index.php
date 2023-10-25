@@ -41,6 +41,9 @@ if (isset($_SESSION['nama'])) {
 </head>
 <body>
 	<img class="wave" src="img/satu.svg">
+	<div class="logo-container">
+  		<img src="img/.png" alt="Logo" class="logo">
+	</div>
 	<div class="container">
 		<div class="img">
 			<img src="img/working1.png" >
@@ -48,7 +51,7 @@ if (isset($_SESSION['nama'])) {
 		<div class="login-content">
 			<form action="" method="post">
 				<!-- <img src="img/avatar.svg"> -->
-				<h2 class="title">Welcome</h2>
+				<h2 class="title">Agenda Harian</h2>
 				<div class="input-div one">
 					<div class="i">
 							<i class="fas fa-user"></i>
