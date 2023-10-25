@@ -143,6 +143,15 @@ $popUp = false;
     <title>Agenda Harian | <?= $nama ?></title>
 
 </head>
+<style>
+    body{
+        background-color: #86C8BC;
+    }
+    .title1{
+        background-color: #3876BF;
+        color:white;
+    }
+</style>
 <body>
 
     <nav class="navbar navbar-expand-lg mainNavbar">
